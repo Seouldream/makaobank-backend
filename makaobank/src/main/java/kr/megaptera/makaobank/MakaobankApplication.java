@@ -17,7 +17,7 @@ public class MakaobankApplication {
   public WebSecurityCustomizer ignoringCustomizer() {
     return (web) -> web.ignoring().antMatchers("/**");
   }
-Ø
+
   @Bean
   public WebMvcConfigurer corsConfigurer() {
     return new WebMvcConfigurer() {

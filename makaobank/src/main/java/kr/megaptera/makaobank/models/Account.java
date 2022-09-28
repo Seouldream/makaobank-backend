@@ -1,6 +1,7 @@
 package kr.megaptera.makaobank.models;
 
 import kr.megaptera.makaobank.dtos.*;
+import kr.megaptera.makaobank.exceptions.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.Entity;
@@ -42,8 +43,22 @@ public class Account {
     this.accountNumber = accountNumber;
   }
 
-  public String getAccountNumber() {
+  public void transferTo(Account other, Long amount) {
+    if(amount <= 0 || amount > this.amount ) {
+      throw new IncorrectAmount(amount);
+    }
+
+    this.amount -= amount;
+
+    other.amount += amount;
+  }
+
+  public String accountNumber() {
     return accountNumber;
+  }
+
+  public Long amount() {
+    return amount;
   }
 
   public static Account fake(String accountNumber) {
@@ -53,4 +68,7 @@ public class Account {
   public AccountDto toDto() {
     return new AccountDto(accountNumber, name, amount);
   }
+
+
+
 }

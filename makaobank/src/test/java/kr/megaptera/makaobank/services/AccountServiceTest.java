@@ -35,7 +35,7 @@ class AccountServiceTest {
 
     verify(accountRepository).findByAccountNumber("1234");
 
-    assertThat(account.getAccountNumber()).isEqualTo("1234");
+    assertThat(account.accountNumber()).isEqualTo("1234");
   }
 
 }
