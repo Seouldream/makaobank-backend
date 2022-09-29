@@ -27,6 +27,6 @@ class TransactionTest {
         sender, receiver, 100_000L, "Test");
 
     assertThat(transaction.name(sender)).isEqualTo("5678");
-    assertThat(transaction.activity(receiver)).isEqualTo("Test");
+    assertThat(transaction.activity(receiver)).isEqualTo("입금");
   }
 }

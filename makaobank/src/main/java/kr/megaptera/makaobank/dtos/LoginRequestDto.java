@@ -2,7 +2,7 @@ package kr.megaptera.makaobank.dtos;
 
 public class LoginRequestDto {
   private String accountNumber;
-      private String password;
+  private String password;
 
   public LoginRequestDto() {
   }
@@ -12,7 +12,7 @@ public class LoginRequestDto {
     this.password = password;
   }
 
-  public String getAccount() {
+  public String getAccountNumber() {
     return accountNumber;
   }
 

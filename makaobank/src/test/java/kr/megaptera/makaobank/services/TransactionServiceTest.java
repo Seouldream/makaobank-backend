@@ -8,6 +8,7 @@ import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -29,10 +30,10 @@ class TransactionServiceTest {
 
     given(transactionRepository
         .findAllBySenderOrReceiver(
-        accountNumber, accountNumber,any()))
+        eq(accountNumber), eq(accountNumber),any()))
         .willReturn(List.of(transaction));
 
-    List<Transaction> transactions = transactionService.list(accountNumber,-1);
+    List<Transaction> transactions = transactionService.list(accountNumber,1);
 
     assertThat(transactions).hasSize(1);
   }

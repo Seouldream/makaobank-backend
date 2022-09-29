@@ -21,9 +21,12 @@ public class SessionController {
   public LoginResultDto login(
       @RequestBody LoginRequestDto loginRequestDto
   ) {
-    Account account = loginService.login(
-        loginRequestDto.getAccount(),
-        loginRequestDto.getPassword());
+    AccountNumber accountNumber
+        = new AccountNumber(loginRequestDto.getAccountNumber());
+    String password = loginRequestDto.getPassword();
+
+    Account account = loginService.login(accountNumber, password);
+
     return new LoginResultDto(
         account.accountNumber().value(),
         account.name(),
@@ -34,6 +37,6 @@ public class SessionController {
   @ExceptionHandler(LoginFailed.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   String loginFailed() {
-  return "Login failed";
+    return "Login failed";
   }
 }

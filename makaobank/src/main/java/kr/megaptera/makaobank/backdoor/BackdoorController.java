@@ -1,6 +1,7 @@
 package kr.megaptera.makaobank.backdoor;
 
 import org.springframework.jdbc.core.*;
+import org.springframework.security.crypto.password.*;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.*;
@@ -12,8 +13,12 @@ import java.time.*;
 public class BackdoorController {
   private final JdbcTemplate jdbcTemplate;
 
-  public BackdoorController(JdbcTemplate jdbcTemplate) {
+  private final PasswordEncoder passwordEncoder;
+
+  public BackdoorController(JdbcTemplate jdbcTemplate,
+                            PasswordEncoder passwordEncoder) {
     this.jdbcTemplate = jdbcTemplate;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @GetMapping("setup-database")
@@ -25,20 +30,22 @@ public class BackdoorController {
 
     jdbcTemplate.update("" +
               "INSERT INTO account(" +
-              "id, name, account_number, amount," +
-              " created_at, updated_at" +
+              "id, account_number, encoded_password, name," +
+              "amount, created_at, updated_at" +
               ")" +
-              " VALUES(1, 'Tester', '1234', 123000, ?, ?)",
-        now, now
+              " VALUES(1, ?, ? ,?, ?, ?, ?)",
+        "1234",passwordEncoder.encode("password"),"Tester"
+        , 1_000_000, now, now
     );
 
     jdbcTemplate.update("" +
-              "INSERT INTO account(" +
-              "id, name, account_number, amount," +
-              " created_at, updated_at" +
-              ")" +
-              " VALUES(2, 'Ashal', '1234567890', 123456000, ?, ?)",
-        now, now
+            "INSERT INTO account(" +
+            "id, account_number, encoded_password, name," +
+            "amount, created_at, updated_at" +
+            ")" +
+            " VALUES(2, ?, ? ,?, ?, ?, ?)",
+        "1234567890",passwordEncoder.encode("password"),"Ashal"
+        , 1_234_567_890, now, now
     );
 
     return "OK";

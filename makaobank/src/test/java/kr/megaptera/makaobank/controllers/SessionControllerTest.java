@@ -28,10 +28,12 @@ class SessionControllerTest {
 
   @BeforeEach
   void setUp() {
-    Account account = Account.fake("1234");
-    given(loginService.login("1234","password"))
-        .willReturn(account);
-    given(loginService.login("1234","xxx"))
+
+    AccountNumber accountNumber = new AccountNumber("1234");
+    given(loginService.login(accountNumber,"password"))
+        .willReturn(Account.fake(accountNumber.value()));
+
+    given(loginService.login(accountNumber,"xxx"))
         .willThrow(new LoginFailed());
   }
 

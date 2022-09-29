@@ -40,10 +40,10 @@ class TransactionRepositoryTest {
 
     jdbcTemplate.update("" +
             "INSERT INTO transaction(" +
-            "id, sender, receiver, amount, name" +
+            "id, sender, receiver, amount, name," +
             " created_at, updated_at" +
             ")" +
-            " VALUES(1, ?, ?, ?, ?, ?, ?)",
+            " VALUES(1,?,?,?,?,?,?)",
         sender.value(), receiver.value(), amount, name, now, now
     );
 
