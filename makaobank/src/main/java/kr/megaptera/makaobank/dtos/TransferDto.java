@@ -8,11 +8,21 @@ public class TransferDto {
   @NotNull
   private Long amount;
 
+  @NotBlank
+  private String name;
+
   public String getTo() {
     return to;
   }
 
+  public TransferDto() {
+  }
+
   public Long getAmount() {
     return amount;
+  }
+
+  public String getName() {
+    return name;
   }
 }

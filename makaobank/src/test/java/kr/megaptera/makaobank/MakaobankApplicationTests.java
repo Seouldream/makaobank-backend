@@ -8,7 +8,6 @@ import org.springframework.test.context.*;
 @ActiveProfiles("test")
 class MakaobankApplicationTests {
 
-
   @Test
   void contextLoads() {
   }

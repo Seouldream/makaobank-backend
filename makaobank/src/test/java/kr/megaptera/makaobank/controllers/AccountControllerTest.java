@@ -23,11 +23,9 @@ class AccountControllerTest {
   @MockBean
   private AccountService accountService;
 
-
   @Test
   void account() throws Exception {
     given(accountService.detail(any())).willReturn(Account.fake("1234"));
-
 
     mockMvc.perform(MockMvcRequestBuilders.get("/accounts/me"))
         .andExpect(status().isOk())
@@ -38,7 +36,7 @@ class AccountControllerTest {
 
   @Test
   void accountNotFound() throws Exception {
-    given(accountService.detail(any())).willThrow(new AccountNotFound("1234"));
+    given(accountService.detail(any())).willThrow(new AccountNotFound(new AccountNumber("1234")));
 
 
     mockMvc.perform(MockMvcRequestBuilders.get("/accounts/me"))

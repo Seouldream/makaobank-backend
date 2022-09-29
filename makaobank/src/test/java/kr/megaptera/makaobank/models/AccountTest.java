@@ -16,8 +16,8 @@ class AccountTest {
 
   @BeforeEach
   void setUp() {
-    account1 = new Account(1L, "1234","From", AMOUNT1);
-    account2 = new Account(2L, "5678","to", AMOUNT2);
+    account1 = new Account(1L, new AccountNumber("1234"),"From", AMOUNT1);
+    account2 = new Account(2L, new AccountNumber("5678"),"to", AMOUNT2);
   }
   @Test
   void transferTo() {
@@ -33,8 +33,11 @@ class AccountTest {
   void transferWithNegativeAmount() {
     Long transferAmount = -100_000L;
 
-    Account account1 = new Account(1L, "1234", "From", AMOUNT1);
-    Account account2 = new Account(2L, "5678", "To", AMOUNT2);
+    AccountNumber accountNumber1 = new AccountNumber("1234");
+    AccountNumber accountNumber2 = new AccountNumber("5678");
+
+    Account account1 = new Account(1L, accountNumber1, "From", AMOUNT1);
+    Account account2 = new Account(2L, accountNumber2, "To", AMOUNT2);
 
 
 
@@ -47,8 +50,11 @@ class AccountTest {
   void transferWithTooLargeAmount() {
     final Long transferAmount = AMOUNT1 + 100_000L;
 
-    Account account1 = new Account(1L, "1234", "From", AMOUNT1);
-    Account account2 = new Account(2L, "5678", "To", AMOUNT2);
+    AccountNumber accountNumber1 = new AccountNumber("1234");
+    AccountNumber accountNumber2 = new AccountNumber("5678");
+
+    Account account1 = new Account(1L, accountNumber1, "From", AMOUNT1);
+    Account account2 = new Account(2L, accountNumber2, "To", AMOUNT2);
 
 
     assertThrows(IncorrectAmount.class, () -> {

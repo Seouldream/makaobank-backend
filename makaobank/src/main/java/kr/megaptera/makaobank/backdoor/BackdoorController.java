@@ -24,7 +24,7 @@ public class BackdoorController {
 
     jdbcTemplate.update("" +
               "INSERT INTO account(" +
-              " id, name, account_number, amount," +
+              "id, name, account_number, amount," +
               " created_at, updated_at" +
               ")" +
               " VALUES(1, 'Tester', '1234', 123000, ?, ?)",
@@ -33,7 +33,7 @@ public class BackdoorController {
 
     jdbcTemplate.update("" +
               "INSERT INTO account(" +
-              " id, name, account_number, amount," +
+              "id, name, account_number, amount," +
               " created_at, updated_at" +
               ")" +
               " VALUES(2, 'Ashal', '1234567890', 123456000, ?, ?)",

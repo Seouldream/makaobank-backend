@@ -13,8 +13,8 @@ class AccountRepositoryTest {
   private AccountRepository accountRepository;
 
   @Test
-  void creation() {
-    Account account = new Account("12345", "Tester");
+  void save() {
+    Account account = new Account(new AccountNumber("12345"), "Tester");
 
     accountRepository.save(account);
   }

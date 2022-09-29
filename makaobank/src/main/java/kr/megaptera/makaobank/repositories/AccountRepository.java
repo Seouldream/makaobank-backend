@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.*;
 import java.util.*;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
-  Optional<Account> findByAccountNumber(String accountNumber);
+  Optional<Account> findByAccountNumber(AccountNumber accountNumber);
 
   Account save(Account account);
 }

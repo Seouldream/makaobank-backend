@@ -11,5 +11,6 @@ public class TransferResultDto {
 
   private Long transferred;
 
-
+  public TransferResultDto() {
+  }
 }

@@ -5,6 +5,9 @@ public class AccountDto {
   private String name;
   private Long amount;
 
+  public AccountDto() {
+  }
+
   public String getAccountNumber() {
     return accountNumber;
   }

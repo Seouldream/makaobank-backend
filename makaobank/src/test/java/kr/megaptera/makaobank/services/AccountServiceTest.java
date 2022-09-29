@@ -28,14 +28,15 @@ class AccountServiceTest {
 
   @Test
   void detail() {
+    AccountNumber accountNumber = new AccountNumber("1234");
     AccountService accountService = new AccountService(accountRepository);
 
-    Account account = accountService.detail("1234");
+    Account account = accountService.detail(accountNumber);
 
 
-    verify(accountRepository).findByAccountNumber("1234");
+    verify(accountRepository).findByAccountNumber(accountNumber);
 
-    assertThat(account.accountNumber()).isEqualTo("1234");
+    assertThat(account.accountNumber()).isEqualTo(accountNumber);
   }
 
 }

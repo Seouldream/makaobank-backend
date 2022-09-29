@@ -14,7 +14,8 @@ public class Account {
   @GeneratedValue
   private Long id;
 
-  private String accountNumber;
+  @Embedded
+  private AccountNumber accountNumber;
 
   private String name;
 
@@ -24,19 +25,19 @@ public class Account {
   private LocalDateTime createdAt;
 
   @UpdateTimestamp
-  private LocalDateTime updateAt;
+  private LocalDateTime updatedAt;
 
 
   public Account() {
   }
 
-  public Account(String accountNumber, String name) {
+  public Account(AccountNumber accountNumber, String name) {
     this.accountNumber = accountNumber;
     this.name = name;
     this.amount = 0L;
   }
 
-  public Account(Long id, String accountNumber, String name, Long amount) {
+  public Account(Long id, AccountNumber accountNumber, String name, Long amount) {
     this.id = id;
     this.name = name;
     this.amount = amount;
@@ -44,7 +45,7 @@ public class Account {
   }
 
   public void transferTo(Account other, Long amount) {
-    if(amount <= 0 || amount > this.amount ) {
+    if (amount <= 0 || amount > this.amount) {
       throw new IncorrectAmount(amount);
     }
 
@@ -53,7 +54,7 @@ public class Account {
     other.amount += amount;
   }
 
-  public String accountNumber() {
+  public AccountNumber accountNumber() {
     return accountNumber;
   }
 
@@ -61,14 +62,14 @@ public class Account {
     return amount;
   }
 
-  public static Account fake(String accountNumber) {
-    return new Account(1L, accountNumber, "Tester", 100L);
-  }
-
   public AccountDto toDto() {
-    return new AccountDto(accountNumber, name, amount);
+    return new AccountDto(accountNumber.value(), name, amount);
   }
 
+  public static Account fake(String accountNumber) {
+    return new Account(
+        1L, new AccountNumber(accountNumber), "Tester", 100L);
+  }
 
 
 }
