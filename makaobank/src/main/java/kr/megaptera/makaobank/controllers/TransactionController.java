@@ -51,7 +51,8 @@ public class TransactionController {
     Long amount = transferService.transfer(
         sender,
         receiver,
-        transferDto.getAmount(), transferDto.getName());
+        transferDto.getAmount(),
+        transferDto.getName());
     return new TransferResultDto((amount));
   }
 

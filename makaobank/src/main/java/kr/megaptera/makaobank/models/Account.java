@@ -62,6 +62,10 @@ public class Account {
     return amount;
   }
 
+  public String name() {
+    return name;
+  }
+
   public AccountDto toDto() {
     return new AccountDto(accountNumber.value(), name, amount);
   }
@@ -70,6 +74,5 @@ public class Account {
     return new Account(
         1L, new AccountNumber(accountNumber), "Tester", 100L);
   }
-
 
 }

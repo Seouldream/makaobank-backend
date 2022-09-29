@@ -20,6 +20,7 @@ public class BackdoorController {
   public String setupDatabase() {
     LocalDateTime now = LocalDateTime.now();
 
+    jdbcTemplate.execute("DELETE FROM transaction");
     jdbcTemplate.execute("DELETE FROM account");
 
     jdbcTemplate.update("" +
