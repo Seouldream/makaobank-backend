@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -27,11 +28,11 @@ class TransactionServiceTest {
     Transaction transaction = mock(Transaction.class);
 
     given(transactionRepository
-        .findAllBySenderOrReceiverOrderByCreatedAtDesc(
-        accountNumber, accountNumber))
+        .findAllBySenderOrReceiver(
+        accountNumber, accountNumber,any()))
         .willReturn(List.of(transaction));
 
-    List<Transaction> transactions = transactionService.list(accountNumber);
+    List<Transaction> transactions = transactionService.list(accountNumber,-1);
 
     assertThat(transactions).hasSize(1);
   }

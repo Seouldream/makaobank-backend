@@ -3,6 +3,7 @@ package kr.megaptera.makaobank.services;
 import kr.megaptera.makaobank.models.*;
 import kr.megaptera.makaobank.models.Transaction;
 import kr.megaptera.makaobank.repositories.*;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.*;
 
 import javax.transaction.*;
@@ -17,9 +18,11 @@ public class TransactionService {
     this.transactionRepository = transactionRepository;
   }
 
-  public List<Transaction> list(AccountNumber accountNumber) {
+  public List<Transaction> list(AccountNumber accountNumber, int page) {
+    Sort sort = Sort.by("createdAt").descending();
+    Pageable pageable = PageRequest.of(page - 1, 100, sort);
     return transactionRepository
-          .findAllBySenderOrReceiverOrderByCreatedAtDesc(
-            accountNumber, accountNumber);
+        .findAllBySenderOrReceiver(
+            accountNumber, accountNumber, pageable);
   }
 }

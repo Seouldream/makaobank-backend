@@ -33,7 +33,7 @@ class TransactionControllerTest {
   void list() throws Exception {
     Transaction transaction = mock(Transaction.class);
     AccountNumber accountNumber = new AccountNumber("1234");
-    given(transactionService.list(accountNumber))
+    given(transactionService.list(accountNumber, -1))
         .willReturn(List.of(transaction));
 
     mockMvc.perform(MockMvcRequestBuilders.get("/transactions"))
@@ -42,7 +42,7 @@ class TransactionControllerTest {
             containsString("\"transactions\":[")
         ));
 
-    verify(transactionService).list(accountNumber);
+    verify(transactionService).list(accountNumber, -1);
   }
 
   @Test
