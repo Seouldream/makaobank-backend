@@ -41,7 +41,7 @@ public class SessionController {
 
   @ExceptionHandler(LoginFailed.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  String loginFailed() {
-    return "Login failed";
+  public ErrorDto loginFailed() {
+    return new IncorrectAccountErrorDto();
   }
 }

@@ -39,6 +39,7 @@ public class TransactionController {
 
     return new TransactionsDto(transactionDtos);
   }
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public TransferResultDto transfer(
@@ -65,5 +66,17 @@ public class TransactionController {
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ErrorDto incorrectAmount() {
     return new IncorrectAmountErrorDto();
+  }
+
+  @ExceptionHandler(AmountNotEnough.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorDto amountNotEnough() {
+    return new AmountNotEnoughErrorDto();
+  }
+
+  @ExceptionHandler(MyAccountFound.class)
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  public ErrorDto myAccountFound() {
+    return new MyAccountFoundErrorDto();
   }
 }
