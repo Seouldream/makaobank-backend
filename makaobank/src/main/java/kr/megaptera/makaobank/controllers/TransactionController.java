@@ -27,9 +27,9 @@ public class TransactionController {
 
   @GetMapping
   public TransactionsDto list(
+      @RequestAttribute("accountNumber") AccountNumber accountNumber,
       @RequestParam(required = false, defaultValue = "1") Integer page
   ) {
-    AccountNumber accountNumber = new AccountNumber("1234");
 
     List<TransactionDto> transactionDtos =
         transactionService.list(accountNumber, page)
@@ -39,14 +39,13 @@ public class TransactionController {
 
     return new TransactionsDto(transactionDtos);
   }
-
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public TransferResultDto transfer(
+      @RequestAttribute("accountNumber") AccountNumber sender,
       @Valid @RequestBody TransferDto transferDto
   ) {
     //ToDo 인증후 제대로 처리할 것
-    AccountNumber sender = new AccountNumber("1234");
     AccountNumber receiver = new AccountNumber(transferDto.getTo());
     Long amount = transferService.transfer(
         sender,

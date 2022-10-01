@@ -56,7 +56,7 @@ public class BackdoorController {
       @RequestParam Long userId,
       @RequestParam Long amount
   ) {
-    jdbcTemplate.update("UPDATE account SET amount=?", amount);
+    jdbcTemplate.update("UPDATE account SET amount=? WHERE id=?", amount,userId);
 
     return "OK";
   }
